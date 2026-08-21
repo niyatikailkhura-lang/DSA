@@ -9,17 +9,16 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
- int func(TreeNode* node){
-    if(node==NULL) return 0;
-    int tempmax=0;
-    tempmax=1+max(func(node->left),func(node->right));
-    return tempmax;
-
- }
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-   
-    return func(root);
+bool func(TreeNode*node,int sum){
+    if(node==NULL) return false;
+    if(node->left==NULL && node->right==NULL){
+        return node->val==sum;
+    }
+    return func(node->left,sum-node->val) || func(node->right,sum-node->val);
+}
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        return func(root,targetSum);
     }
 };
