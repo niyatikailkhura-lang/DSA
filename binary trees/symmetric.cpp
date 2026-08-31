@@ -11,21 +11,23 @@
  */
 class Solution {
 public:
-bool func(TreeNode*p,TreeNode*q){
-    if(p==NULL && q==NULL){
+bool func(TreeNode*leftn,TreeNode*rightn){
+    if(leftn==NULL && rightn==NULL){
         return true;
     }
-    if(p==NULL || q==NULL){
+    if(leftn==NULL || rightn==NULL){
         return false;
     }
-   
-     if(p->val!=q->val){
-            return false;
-        }
-    return func(p->left,q->left) && func(p->right,q->right);   
+    if(leftn->val!=rightn->val){
+        return false;
+    }
+    return func(leftn->left,rightn->right) && func(leftn->right,rightn->left);
     
 }
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-       return func(p,q); 
+    bool isSymmetric(TreeNode* root) {
+        if(root==NULL) return true;
+        TreeNode*left=root->left;
+        TreeNode*right=root->right;
+        return func(left,right);
     }
 };
